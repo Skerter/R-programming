@@ -1,8 +1,9 @@
-# запуск проги Rscript --vanilla labs/lab05/lab05.R
+# запуск проги
+# Rscript labs/lab05/lab05.R
 
 cat("1. Гистограмма и boxplot\n")
 
-# Учебная выборка; 5 и 100 добавлены как заведомые ошибки измерения.
+# 5 и 100 добавлены как заведомые ошибки измерения
 set.seed(123)
 values <- c(rnorm(50, mean = 50, sd = 5), 5, 100)
 
@@ -32,9 +33,6 @@ print(c(Q1 = q1, Q3 = q3, IQR = iqr_value))
 cat("Границы:", lower_bound, "и", upper_bound, "\n")
 print(data.frame(index = which(outlier_mask), value = values[outlier_mask]))
 
-# В этом примере удаление обосновано известным происхождением ошибок.
-# В реальных данных выход за границу IQR сам по себе не доказывает ошибку.
-# Исходный вектор сохраняем; пороги вычисляем один раз, без повторного удаления.
 values_clean <- values[!outlier_mask]
 cat("Удалено значений:", sum(outlier_mask), "\n")
 comparison <- data.frame(
@@ -46,9 +44,6 @@ comparison <- data.frame(
 )
 print(comparison)
 
-# Учебная выборка генерируется из независимых наблюдений.
-# H0: наблюдения происходят из нормального распределения.
-# H1: распределение отличается от нормального. Уровень значимости — 0,05.
 cat("\n3. Тест Шапиро–Уилка\n")
 
 alpha <- 0.05
@@ -67,9 +62,6 @@ normality_results$conclusion <- ifelse(
 )
 print(normality_results)
 
-# Большое p-value не доказывает нормальность. После отбора по IQR тест
-# служит описательным сравнением: отбор меняет распределение выборки.
-# Нельзя удалять значения только ради получения p-value больше 0,05.
 png("labs/lab05/normality.png", width = 1400, height = 650, res = 120)
 par(mfrow = c(1, 2), mar = c(4, 4, 3, 1))
 qqnorm(
@@ -83,4 +75,4 @@ qqnorm(
 )
 qqline(values_clean, col = "red", lwd = 2)
 invisible(dev.off())
-cat("Q–Q-графики: labs/lab05/normality.png\n")
+cat("Q–Q-графики: labs/lab05/normality.png")
