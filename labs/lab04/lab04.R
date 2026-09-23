@@ -28,7 +28,6 @@ print(missing_mask)
 cat("Позиции пропусков:", which(missing_mask), "\n")
 cat("Количество пропусков:", sum(missing_mask), "\n")
 
-# Исключаем NA: оснований восстанавливать значения нет; исходник сохраняем.
 values_clean <- values[!missing_mask]
 print(values_clean)
 cat("Число элементов до обработки:", length(values), "\n")
