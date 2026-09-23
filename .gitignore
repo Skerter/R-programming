@@ -8,11 +8,6 @@
 .Rtmp/
 *.Rout
 
-# renv — локальное окружение
-renv/library/
-renv/staging/
-renv/sandbox/
-
 # Windows
 Thumbs.db
 Desktop.ini
