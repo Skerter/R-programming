@@ -1,0 +1,64 @@
+[1mdiff --git a/labs/lab04/lab04.R b/labs/lab04/lab04.R[m
+[1mindex f46a7f7..b932328 100644[m
+[1m--- a/labs/lab04/lab04.R[m
+[1m+++ b/labs/lab04/lab04.R[m
+[36m@@ -28,7 +28,6 @@[m [mprint(missing_mask)[m
+ cat("Позиции пропусков:", which(missing_mask), "\n")[m
+ cat("Количество пропусков:", sum(missing_mask), "\n")[m
+ [m
+[31m-# Исключаем NA: оснований восстанавливать значения нет; исходник сохраняем.[m
+ values_clean <- values[!missing_mask][m
+ print(values_clean)[m
+ cat("Число элементов до обработки:", length(values), "\n")[m
+[1mdiff --git a/labs/lab05/lab05.R b/labs/lab05/lab05.R[m
+[1mindex 8031131..da67a61 100644[m
+[1m--- a/labs/lab05/lab05.R[m
+[1m+++ b/labs/lab05/lab05.R[m
+[36m@@ -1,8 +1,9 @@[m
+[31m-# запуск проги Rscript --vanilla labs/lab05/lab05.R[m
+[32m+[m[32m# запуск проги[m
+[32m+[m[32m# Rscript labs/lab05/lab05.R[m
+ [m
+ cat("1. Гистограмма и boxplot\n")[m
+ [m
+[31m-# Учебная выборка; 5 и 100 добавлены как заведомые ошибки измерения.[m
+[32m+[m[32m# 5 и 100 добавлены как заведомые ошибки измерения[m
+ set.seed(123)[m
+ values <- c(rnorm(50, mean = 50, sd = 5), 5, 100)[m
+ [m
+[36m@@ -32,9 +33,6 @@[m [mprint(c(Q1 = q1, Q3 = q3, IQR = iqr_value))[m
+ cat("Границы:", lower_bound, "и", upper_bound, "\n")[m
+ print(data.frame(index = which(outlier_mask), value = values[outlier_mask]))[m
+ [m
+[31m-# В этом примере удаление обосновано известным происхождением ошибок.[m
+[31m-# В реальных данных выход за границу IQR сам по себе не доказывает ошибку.[m
+[31m-# Исходный вектор сохраняем; пороги вычисляем один раз, без повторного удаления.[m
+ values_clean <- values[!outlier_mask][m
+ cat("Удалено значений:", sum(outlier_mask), "\n")[m
+ comparison <- data.frame([m
+[36m@@ -46,9 +44,6 @@[m [mcomparison <- data.frame([m
+ )[m
+ print(comparison)[m
+ [m
+[31m-# Учебная выборка генерируется из независимых наблюдений.[m
+[31m-# H0: наблюдения происходят из нормального распределения.[m
+[31m-# H1: распределение отличается от нормального. Уровень значимости — 0,05.[m
+ cat("\n3. Тест Шапиро–Уилка\n")[m
+ [m
+ alpha <- 0.05[m
+[36m@@ -67,9 +62,6 @@[m [mnormality_results$conclusion <- ifelse([m
+ )[m
+ print(normality_results)[m
+ [m
+[31m-# Большое p-value не доказывает нормальность. После отбора по IQR тест[m
+[31m-# служит описательным сравнением: отбор меняет распределение выборки.[m
+[31m-# Нельзя удалять значения только ради получения p-value больше 0,05.[m
+ png("labs/lab05/normality.png", width = 1400, height = 650, res = 120)[m
+ par(mfrow = c(1, 2), mar = c(4, 4, 3, 1))[m
+ qqnorm([m
+[36m@@ -83,4 +75,4 @@[m [mqqnorm([m
+ )[m
+ qqline(values_clean, col = "red", lwd = 2)[m
+ invisible(dev.off())[m
+[31m-cat("Q–Q-графики: labs/lab05/normality.png\n")[m
+[32m+[m[32mcat("Q–Q-графики: labs/lab05/normality.png")[m
